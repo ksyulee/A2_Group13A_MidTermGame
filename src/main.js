@@ -30,7 +30,6 @@ let noiseNode;
 let gainNode;
 let promptTimeout;
 let currentAudio = null;
-
 let lastSpokenText = "";
 let lastSpokenStatic = false;
 
@@ -280,7 +279,6 @@ function playCurrentPrompt(withStatic) {
     if (withStatic) {
       promptText = jumbleText(promptText);
     }
-    // Save the exact text and static state so we can repeat it
     lastSpokenText = promptText;
     lastSpokenStatic = withStatic;
     speak(promptText, 0.8, withStatic);
