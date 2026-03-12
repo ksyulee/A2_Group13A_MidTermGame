@@ -31,6 +31,9 @@ let gainNode;
 let promptTimeout;
 let currentAudio = null;
 
+let lastSpokenText = "";
+let lastSpokenStatic = false;
+
 function stopAllAudio() {
   window.speechSynthesis.cancel();
   if (currentAudio) {
@@ -277,9 +280,19 @@ function playCurrentPrompt(withStatic) {
     if (withStatic) {
       promptText = jumbleText(promptText);
     }
+    // Save the exact text and static state so we can repeat it
+    lastSpokenText = promptText;
+    lastSpokenStatic = withStatic;
     speak(promptText, 0.8, withStatic);
   }
 }
+
+document.getElementById('btn-repeat').addEventListener('click', () => {
+  if (lastSpokenText) {
+    stopAllAudio();
+    speak(lastSpokenText, 0.8, lastSpokenStatic);
+  }
+});
 
 document.getElementById('btn-clarify').addEventListener('click', () => {
   if (battery >= 5) {
