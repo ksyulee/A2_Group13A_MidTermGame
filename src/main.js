@@ -198,6 +198,7 @@ function startGame(levelIdx = 0) {
   currentLevelStep = 0;
   lightRadius = 80;
   darkRadius = 180;
+  isMoving = false;
   
   drawMaze(levelData);
   updateBatteryDisplay();
